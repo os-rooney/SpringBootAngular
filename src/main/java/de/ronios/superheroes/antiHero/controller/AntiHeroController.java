@@ -6,7 +6,9 @@ import de.ronios.superheroes.antiHero.service.AntiHeroService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -27,6 +29,20 @@ public class AntiHeroController {
         var entity = convertToEntity(antiHeroDto);
         var antiHero = service.addAntiHero(entity);
         return convertToDto(antiHero);
+    }
+
+    @PutMapping("/{id}")
+    public void putAntiHero(
+            @PathVariable ("id") UUID id,
+            @Valid @RequestBody AntiHeroDto antiHeroDto
+    ){
+        if(!id.equals(antiHeroDto.getId())) throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "id does not match."
+        );
+
+        var antiHeroEntity = convertToEntity(antiHeroDto);
+        service.updateAntiHero(id, antiHeroEntity);
     }
 
     private AntiHeroDto convertToDto(AntiHeroEntity entity) {
