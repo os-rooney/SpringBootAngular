@@ -1,4 +1,4 @@
-package de.ronios.superheroes.antiHero.exception;
+package de.ronios.superheroes.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {

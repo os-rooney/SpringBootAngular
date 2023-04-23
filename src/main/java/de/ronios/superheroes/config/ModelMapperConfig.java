@@ -1,4 +1,4 @@
-package de.ronios.superheroes.antiHero.config;
+package de.ronios.superheroes.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
