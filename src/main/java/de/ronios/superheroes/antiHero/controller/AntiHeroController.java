@@ -3,12 +3,10 @@ package de.ronios.superheroes.antiHero.controller;
 import de.ronios.superheroes.antiHero.dto.AntiHeroDto;
 import de.ronios.superheroes.antiHero.entity.AntiHeroEntity;
 import de.ronios.superheroes.antiHero.service.AntiHeroService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -22,6 +20,13 @@ public class AntiHeroController {
     @GetMapping("/{id}")
     public AntiHeroDto getAntiHeroById(@PathVariable("id") UUID id){
         return convertToDto(service.findAntiHeroById(id));
+    }
+
+    @PostMapping
+    public AntiHeroDto postAntiHero(@Valid @RequestBody AntiHeroDto antiHeroDto){
+        var entity = convertToEntity(antiHeroDto);
+        var antiHero = service.addAntiHero(entity);
+        return convertToDto(antiHero);
     }
 
     private AntiHeroDto convertToDto(AntiHeroEntity entity) {
