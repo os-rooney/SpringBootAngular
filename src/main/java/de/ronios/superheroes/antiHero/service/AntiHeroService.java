@@ -1,12 +1,11 @@
 package de.ronios.superheroes.antiHero.service;
 
 import de.ronios.superheroes.antiHero.entity.AntiHeroEntity;
-import de.ronios.superheroes.antiHero.exception.NotFoundException;
+import de.ronios.superheroes.exception.NotFoundException;
 import de.ronios.superheroes.antiHero.repository.AntiHeroRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
